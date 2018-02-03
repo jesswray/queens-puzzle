@@ -3,14 +3,15 @@ require 'httparty'
 class IpChecker
   attr_reader :address
 
-  def initialize(ip = '8.8.8.8')
-    @address = ip
+  def initialize(ip)
+    @address = ip || '8.8.8.8'
+    puts "Initialized with #{@address}"
   end
 
   def latitude
     geodata = check['loc']
     fail 'Are you sure that place exists?' unless geodata
-    geodata.split(',').first
+    geodata.split(',').first.to_i
   end
 
   def check

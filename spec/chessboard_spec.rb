@@ -4,7 +4,7 @@ require_relative '../lib/chessboard'
 RSpec.describe Chessboard do
   let(:board) { Chessboard.new(9) }
 
-  describe 'assign_pieces' do
+  describe 'assign_pieces!' do
     before do
       board.assign_pieces
     end

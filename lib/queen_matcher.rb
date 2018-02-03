@@ -4,7 +4,7 @@ require_relative 'chessboard'
 class QueenMatcher
   def initialize(queens)
     @queens = queens
-    fail 'Two queens and two queens only, silly!' if @queens.count != 2
+    fail 'Two queens and two queens only!' if @queens.count != 2
   end
 
   def attacking?
@@ -14,18 +14,19 @@ class QueenMatcher
   private
 
   def shared_diagonal?
-    x_difference = difference_on_axis(:x)
-    y_difference = difference_on_axis(:y)
-
-    x_difference == y_difference
+    difference_on_axis(:x) == difference_on_axis(:y)
   end
 
   def shared_vertical?
-    @queens.map(&:y).reduce(&:==)
+    shared_axis?(:y)
   end
 
   def shared_horizontal?
-    @queens.map(&:x).reduce(&:==)
+    shared_axis?(:x)
+  end
+
+  def shared_axis?(axis)
+    @queens.map(&axis).reduce(&:==)
   end
 
   def difference_on_axis(axis)
