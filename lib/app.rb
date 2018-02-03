@@ -9,8 +9,8 @@ class App
   end
 
   def run
-    # Fetch the board size and cast it to an integer.
-    board_size = IpChecker.new(@ip).latitude.to_int
+    # Fetch the board size.
+    board_size = IpChecker.new(@ip).latitude
     # Create the board and assign its pieces.
     chessboard = Chessboard.new(board_size)
     chessboard.assign_pieces!

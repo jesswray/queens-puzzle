@@ -17,23 +17,19 @@ RSpec.describe QueenMatcher do
 
   describe '#attacking?' do
     it 'understands horizontally attacking queens' do
-      coordinates = [[2, 5],[2, 8]]
-      expect(matcher(coordinates)).to be true
+      expect(matcher([[2, 5], [2, 8]])).to be true
     end
 
     it 'understands vertically attacking queens' do
-      coordinates = [[17, 9], [2, 9]]
-      expect(matcher(coordinates)).to be true
+      expect(matcher([[17, 9], [2, 9]])).to be true
     end
 
     it 'understands diagonally attacking queens' do
-      coordinates = [[6, 3], [3, 6]]
-      expect(matcher(coordinates)).to be true
+      expect(matcher([[6, 3], [3, 6]])).to be true
     end
 
     it 'returns false if queens cannot attack' do
-      coordinates = [[2, 2], [6, 5]]
-      expect(matcher(coordinates)).to be false
+      expect(matcher([[2, 2], [6, 5]])).to be false
     end
   end
 end

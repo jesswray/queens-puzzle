@@ -15,6 +15,15 @@ bundle install
 ruby lib/cli.rb
 ```
 
+or call the program directly
+```
+// ♥ irb
+:001 > require './lib/app'
+ => true
+:002 > App.new('209.191.122.70').run
+ => [[[7, 31], [7, 5]], [[7, 5], [31, 5]], [[7, 5], [5, 3]], [[33, 24], [35, 26]], [[5, 16], [5, 3]], [[4, 26], [35, 26]], [[36, 32], [30, 32]]]
+```
+
 To run specs:
 ```
 bundle exec rspec

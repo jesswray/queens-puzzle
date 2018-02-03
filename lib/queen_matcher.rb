@@ -1,6 +1,3 @@
-require_relative 'queen'
-require_relative 'chessboard'
-
 class QueenMatcher
   def initialize(queens)
     @queens = queens

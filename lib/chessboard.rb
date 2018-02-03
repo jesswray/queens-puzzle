@@ -1,4 +1,5 @@
 require_relative 'queen'
+require_relative 'queen_matcher'
 
 class Chessboard
   attr_reader :size, :pieces
@@ -7,22 +8,26 @@ class Chessboard
     @size = size
   end
 
-  def coordinates
-    @coordinates ||= []
-  end
-
   def assign_pieces!
-    # Assign two random coordinates between 1 and n
-    @pieces = Array.new(number_of_pieces)
-
-    @pieces = @pieces.map do |_piece|
-      piece = assign_until_unique
+    @pieces = Array.new(number_of_pieces).map do
+      piece = assign_until_unique(Queen.new)
       coordinates << piece.coordinates
       piece
     end
   end
 
-  def assign_until_unique(piece = Queen.new)
+  def attacking_coordinates
+    attacking_pairs.map { |pair| pair.map(&:coordinates) }
+  end
+
+  private
+
+  # All possible pairs of pieces
+  def pairs
+    @pieces.combination(2).to_a
+  end
+
+  def assign_until_unique(piece)
     x = random_in_range
     y = random_in_range
     unless coordinates.include? [x, y]
@@ -33,21 +38,8 @@ class Chessboard
     assign_until_unique(piece)
   end
 
-  # All possible pairs of pieces
-  def pairs
-    @pieces.combination(2).to_a
-  end
-
   def attacking_pairs
-    pairs.select do |pair|
-      QueenMatcher.new(pair).attacking?
-    end
-  end
-
-  def attacking_coordinates
-    attacking_pairs.map do |pair|
-      pair.map(&:coordinates)
-    end
+    pairs.select { |pair| QueenMatcher.new(pair).attacking? }
   end
 
   def range
@@ -60,5 +52,9 @@ class Chessboard
 
   def number_of_pieces
     (@size / 2).floor
+  end
+
+  def coordinates
+    @coordinates ||= []
   end
 end

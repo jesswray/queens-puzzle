@@ -3,9 +3,8 @@ require 'httparty'
 class IpChecker
   attr_reader :address
 
-  def initialize(ip)
+  def initialize(ip = nil)
     @address = ip || '8.8.8.8'
-    puts "Initialized with #{@address}"
   end
 
   def latitude
