@@ -6,4 +6,4 @@ gem 'httparty'
 # Test
 gem 'rspec'
 gem 'rspec-core'
-gem 'vcr'
+gem 'pry'

@@ -1,9 +1,8 @@
 class Queen
   attr_accessor :x, :y
 
-  def assign_coordinates(x, y)
-    self.x = x
-    self.y = y
+  def coordinates=(args)
+    self.x, self.y = *args
   end
 
   def coordinates

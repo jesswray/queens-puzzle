@@ -1,4 +1,4 @@
-require 'queen'
+require_relative 'queen'
 
 class Chessboard
   attr_reader :size, :pieces, :coordinates
@@ -22,11 +22,16 @@ class Chessboard
     y = random_in_range
 
     unless @coordinates.include? [x, y]
-      piece.assign_coordinates(x, y)
+      piece.coordinates = [x, y]
       return piece
     end
 
     assign_until_unique(piece)
+  end
+
+  # All possible pairs of pieces
+  def pairs
+    @pieces.combination(2)
   end
 
   def range

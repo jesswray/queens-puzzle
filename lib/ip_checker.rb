@@ -7,9 +7,15 @@ class IpChecker
     @address = ip
   end
 
+  def latitude
+    geodata = check['loc']
+    fail 'Are you sure that place exists?' unless geodata
+    geodata.split(',').first
+  end
+
   def check
-    HTTParty.get('http://ipinfo.io/8.8.8.8')
+    response = HTTParty.get('http://ipinfo.io/8.8.8.8')
+    fail 'Whoops, are you connected to the Internet?' unless response
+    response
   end
 end
-
-IpChecker.new.check
